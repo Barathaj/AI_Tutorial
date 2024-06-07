@@ -136,7 +136,7 @@ def create_subtitle_clips(subtitles, videosize, fontsize=30, font='Arial', color
     return subtitle_clips
 
 def getvideofromimage(image_path, text,index):
-    engine = pyttsx3.init()
+    engine = pyttsx3.init(driverName='sapi5')
     output_file = "output.wav"
     engine.save_to_file(text, output_file)
     engine.runAndWait()
