@@ -181,16 +181,14 @@ def path_image_create(file_paths):
             result+='Page '+str(i) +' : '+text_generation(file_path)+' \n'
             i+=1
         result_text=sequence_text(result)
-        print("yes")
         result_text=clean(result_text)
-        print(result_text)
+        st.write(result_text)
         video_files = []
         index=1
         for image,text in zip(file_paths,result_text):
             video_file =getvideofromimage(image,text,index)
             video_files.append(video_file)
             index+=1
-        print(video_files)
         video_clips = [VideoFileClip(video_file) for video_file in video_files]
         final_video = concatenate_videoclips(video_clips,method="compose")
         final_video_path = "final_output_video.mp4"
