@@ -138,12 +138,12 @@ def create_subtitle_clips(subtitles, videosize, fontsize=30, font='Arial', color
 def getvideofromimage(image_path, text,index):
     engine = pyttsx3.init('dummy')
     output_file = "output.wav"
-    # engine.save_to_file(text, output_file)
-    # engine.runAndWait()
+    engine.save_to_file(text, output_file)
+    engine.runAndWait()
     aai.settings.api_key = "e1313b421dec4789bddac187ad824975"
     transcript = aai.Transcriber().transcribe(output_file)
     subtitles = transcript.export_subtitles_srt()
-    subtitle = "subtitles.srt"
+    subtitle = output_file
     with open(subtitle, "w") as f:
         f.write(subtitles)
     audio_path = 'output.wav'
