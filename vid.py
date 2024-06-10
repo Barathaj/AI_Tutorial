@@ -222,7 +222,7 @@ def getvideofromimage(image_path, text,index):
     title.append(subtitle)
     with open(subtitle, "w") as f:
         f.write(subtitles)
-    audio_path ='F:\\ad\\video\\output.wav'
+    audio_path ='output.wav'
     # audio = AudioSegment.from_file(audio_path, format="wav")
     # duration_ms = len(audio)
     # duration_seconds = duration_ms / 1000
@@ -274,16 +274,16 @@ def path_image_create(file_paths):
             result+='Page '+str(i) +' : '+text_generation(file_path)+' \n'
             i+=1
         result_text=sequence_text(result)
-        print("yes")
+        
         result_=clean(result_text)
-        print(result_)
+     
         video_files = []
         index=1
         for image,text in zip(file_paths,result_):
             video_file =getvideofromimage(image,text,index)
             video_files.append(video_file)
             index+=1
-        print(video_files)
+        
         video_clips = [VideoFileClip(video_file) for video_file in video_files]
         final_video = concatenate_videoclips(video_clips,method="compose")
         final_video_path = "final_output_video.mp4"
@@ -330,7 +330,7 @@ def main():
 
         Fix = st.sidebar.text_input("Fix the Spelling")
         if st.sidebar.button("Submit",key='sidebutton2'):
-            title=[r'F:\ad\video\subtitles1.srt',r'F:\ad\video\subtitles2.srt',r'F:\ad\video\subtitles3.srt']
+            title=['subtitles1.srt','subtitles2.srt','subtitles3.srt']
             i=1
             sub_paths=[]
             sub_video_paths=[]
@@ -338,7 +338,7 @@ def main():
                 sub_paths.append(srtrecreate(path,Fix,i))
                 i+=1
             print(sub_paths)
-            video_paths=[r"F:\ad\video\output_video_with_audio1.mp4",r"F:\ad\video\output_video_with_audio2.mp4",r"F:\ad\video\output_video_with_audio3.mp4"]
+            video_paths=["output_video_with_audio1.mp4","output_video_with_audio2.mp4","output_video_with_audio3.mp4"]
             for i in range(min(len(video_paths),len(sub_paths))):
                 sub_video_paths.append(sub_video(sub_paths[i],video_paths[i],i))
             print(video_paths)
