@@ -211,6 +211,9 @@ def getvideofromimage(image_path, text,index):
     # output_file = "output.wav"
     # engine.save_to_file(text, output_file)
     # engine.runAndWait()
+    output_dir = "video_output"
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
     language = 'en'
     myobj = gTTS(text=text, lang=language, slow=False)
     output_file = "output.wav"
@@ -252,6 +255,11 @@ def getvideofromimage(image_path, text,index):
     subtitle_clips = create_subtitle_clips(subtitles, video.size)
     final_video = CompositeVideoClip([video] + subtitle_clips)
     final_video.write_videofile(output_video_file)
+    output_file = os.path.join(output_dir, "output.wav")
+    subtitle = os.path.join(output_dir, f"subtitles{index}.srt")
+    outputvideo_path = os.path.join(output_dir, "output_video.mp4")
+    outputvideoaudio_path = os.path.join(output_dir, f"output_video_with_audio{index}.mp4")
+    output_video_file = os.path.join(output_dir, f"output_video_subtitling{index}.mp4")
     return output_video_file
 
 def sub_video(subtitle_path,outputvideoaudio_path,index):
