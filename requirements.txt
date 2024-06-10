@@ -8,3 +8,5 @@ pyttsx3==2.71.0
 pydub==0.25.1
 numpy==1.26.4
 comtypes==1.4.2
+gTTS==2.5.1
+mutagen==1.47.0
