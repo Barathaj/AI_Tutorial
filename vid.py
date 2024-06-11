@@ -410,10 +410,19 @@ def image_format(image_path):
     return image_parts
 
 def gemini_output(input_prompt, image_path):
-    image_info = image_format(image_path)
-    input_prompt_with_image = [input_prompt, image_info[0], ""]
-    response = model.generate_content(input_prompt_with_image)
-    return response.text
+    try:
+        image_info = image_format(image_path)
+        input_prompt_with_image = [input_prompt, image_info[0], ""]
+        response = model.generate_content(input_prompt_with_image)
+        
+        if hasattr(response, 'text'):
+            return response.text
+        else:
+            st.error(f"Unexpected response format: {response}")
+            return ""
+    except Exception as e:
+        st.error(f"Error in gemini_output: {e}")
+        return ""
 
 def sequence_text(result):
     prompt=f'''
@@ -635,6 +644,7 @@ def main():
             result_ = clean(res)
             video_files = []
             index = 20
+            st.write(result_)
             for image, text in zip(file_paths, result_):
                 video_file = getvideofromimage(image, text, index)
                 video_files.append(video_file)
