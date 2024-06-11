@@ -211,6 +211,7 @@ def getvideofromimage(image_path, text,index):
     # output_file = "output.wav"
     # engine.save_to_file(text, output_file)
     # engine.runAndWait()
+    os.makedirs("uploaded_video", exist_ok=True)
     output_dir = "video_output"
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
@@ -237,6 +238,7 @@ def getvideofromimage(image_path, text,index):
     image_clip = ImageClip(image_np)
     video = image_clip.set_duration(duration_seconds).set_fps(24)
     outputvideo_path = 'output_video.mp4'
+    os.path.join('uploaded_video',outputvideo_path)
     video.write_videofile(outputvideo_path, codec='libx264', fps=24)
     print("Video creation completed.")
     video_clip = VideoFileClip(outputvideo_path)
